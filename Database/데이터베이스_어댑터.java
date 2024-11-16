@@ -1,15 +1,16 @@
 package Database;
 
 import java.io.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 
 import Actor.AI캐릭터;
 import Actor.사용자;
-import Actor.생성형AI;
-
-import java.sql.*;
 import Factory.팩토리_인터페이스;
-import Main.호감도계산;
 
 /**
  * 
@@ -20,18 +21,17 @@ public class 데이터베이스_어댑터 implements 저장, 수정, 로드 {
      * Default constructor
      */
     public 데이터베이스_어댑터() {
-    	
     }
     public static final String URL = "";
     public static final String ROOT_USER = "root";
     public static final String ROOT_PASSWORD = "password";
     Connection conn;
-    
+
     /**
      * 
      */
     public Connection 데이터베이스연결() {
-    	// TODO implement here
+        // TODO implement here
     	try {
             // 루트 계정으로 데이터베이스 연결
             conn = DriverManager.getConnection(URL, ROOT_USER, ROOT_PASSWORD);
@@ -42,7 +42,7 @@ public class 데이터베이스_어댑터 implements 저장, 수정, 로드 {
     	return null;
     }
 
-    /**	
+    /**
      * @param 쿼리문
      * @throws SQLException 
      */
@@ -70,18 +70,19 @@ public class 데이터베이스_어댑터 implements 저장, 수정, 로드 {
 
     /**
      * @param 쿼리문 
+     * @param 객체타입 
      * @param 팩토리_인터페이스_객체 
      * @return
      * @throws SQLException 
      */
-    public Object 데이터_로드(String 쿼리문, String 객체타입, 팩토리_인터페이스 팩토리_인터페이스_객체) throws SQLException {
+    public Object 데이터_로드(String 쿼리문, String 객체타입, 팩토리_인터페이스 팩토리인터페이스객체) throws SQLException {
         // TODO implement 로드.데이터_로드() here
     	String query = "사용자 정보 조회 SQL";
     	try(PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, 쿼리문);
             
-            Object 객체 = 팩토리_인터페이스_객체.객체생성(객체타입);
+            Object 객체 = 팩토리인터페이스객체.객체생성(객체타입);
             
             try (ResultSet rs = stmt.executeQuery()) {
             	if (rs.next()) {
@@ -102,4 +103,5 @@ public class 데이터베이스_어댑터 implements 저장, 수정, 로드 {
             
     	}
     }
+
 }

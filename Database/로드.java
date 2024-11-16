@@ -13,6 +13,7 @@ public interface 로드 {
 
     /**
      * @param 쿼리문 
+     * @param 객체타입 
      * @param 팩토리_인터페이스_객체 
      * @return
      * @throws SQLException 
