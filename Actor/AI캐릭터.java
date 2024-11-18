@@ -53,6 +53,16 @@ public class AI캐릭터 {
      * 
      */
     private List<String> 싫어하는단어;
+    
+    /**
+     * @param 점수
+     */
+    public void AI캐릭터생성(AI캐릭터 객체) {
+        // TODO implement here
+    	this.캐릭터ID = 객체.캐릭터ID;
+    	this.성격 = 객체.성격;
+    	this.이름 = 객체.이름;
+    }
 
     /**
      * @param 점수
